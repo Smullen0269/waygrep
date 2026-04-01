@@ -9,36 +9,40 @@ int main(const int argc, char *argv[]) { // take command line arguments
 
     char str[100]; // buffer for line in file
 
-    char lower_word[100];
-    strcpy(lower_word, argv[1]);
+    char lower_word[100]; // buffer for lowercase search word
 
+    strcpy(lower_word, argv[1]); // copying search word to lower_word
 
-    for (int i = 0; lower_word[i] != '\0'; i++) {
+    for (int i = 0; lower_word[i] != '\0'; i++) { // make search word lower case for case insensitive search
         lower_word[i] = tolower(lower_word[i]);
     }
+
     if (fptr == NULL) {
         printf("Error opening file\n");
         return 1;
 
     }
-    int found = 0; // loop through lines in file
+
+    int found = 0; // variable for if the loop through file doesn't find a match
+
+    // loop through lines in file
     while(fgets(str,sizeof(str),fptr) != NULL) { // if line contains search word print line else print not found
 
         char lower_str[100]; // buffer for current line
         strcpy(lower_str, str);
 
-        for (int i = 0; lower_str[i] != '\0'; i++){
+        for (int i = 0; lower_str[i] != '\0'; i++){ // make line lower case for search insensitivity
             lower_str[i] = tolower(lower_str[i]);
         }
 
-        if (strstr(lower_str,lower_word)) {
-            printf("%s",str);
+        if (strstr(lower_str,lower_word)) { // if word is contained in line print line
+            printf("%s",str); // print the original line not the lowercase version
             found = 1;
         }
     }
-    if (found == 0) {
+    if (found == 0) { // search word isnt contained in file.
         printf("Word Not found\n");
     }
-    fclose(fptr);
+    fclose(fptr); // close file
     return 0;
 }
