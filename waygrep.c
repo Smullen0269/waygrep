@@ -3,13 +3,14 @@
 #include <string.h>
 int main(const int argc, char *argv[]) { // take command line arguments
     if (argc != 3) {
-        printf("Usage: ./waygrep search_word filename"); return 1;
+        printf("Usage: ./waygrep search_word filename\n");
+        return 1;
     }
-    FILE* fptr = fopen(argv[2], "r"); // open file
+    FILE* fptr = fopen(argv[2], "r");
 
-    char str[100]; // buffer for line in file
+    char str[100]; // buffer to store each line read from file
 
-    char lower_word[100]; // buffer for lowercase search word
+    char lower_word[100]; // buffer to store lowercase search word
 
     strcpy(lower_word, argv[1]); // copying search word to lower_word
 
